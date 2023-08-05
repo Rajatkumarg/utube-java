@@ -1,0 +1,60 @@
+Lambda
+
+- anonymous function
+- contains: 
+	a) parameter (if needed)
+	b) body
+	c) return data (if needed)
+		
+	() -> {}
+
+-	In case of Functional Interface, we use it.
+
+
+-if there is only one statement of body, we can skip {}
+
+
+Examples - 
+
+Normal method:
+public void method(){
+	System.out.println(“Hello World”);
+}
+
+Lambda Exp:
+() -> { System.out.println(“Hello World”);};
+OR
+if there is one statement, we can skip {}
+() -> System.out.println(“Hello World”);
+
+Normal:
+public String getCountry(){
+	return “India”;
+}
+Lambda:
+() -> {return “India”;};
+Or
+we can remove return incase of one expression along with {}
+() -> “India”;
+
+Normal:
+public String getCountry(String country){
+	return country;
+}
+Lambda:
+(String country) -> {return country;};
+Or
+(country) -> country;
+Or
+country -> country;
+
+Normal:
+public String getDiff(int a, int b){
+	return a-b;
+}
+Lambda:
+(int a, int b) -> {return a-b;};
+Or
+(int a, int b) -> a-b;
+Or
+(a,b)->a-b;
