@@ -1,0 +1,89 @@
+Lambda Expression
+
+We use lambda expression to provide implementation of abstract method declared inside functional interface
+
+let's understand with example
+
+Ex-1
+without Lambda
+
+@FunctionalInterface
+public interface Interface {
+    public void method();
+}
+class InterfaceImpl implements Interface{
+    public void method(){
+        System.out.println("Method called");
+    }
+}
+class TestInterfaceImpl{
+    public static void main(String[] args) {
+        InterfaceImpl obj = new InterfaceImpl();
+        obj.method();
+    }
+}
+
+Code is fine but Issue is - unnecessary defining  InterfaceImpl
+
+Now with Lambda
+
+@FunctionalInterface
+public interface Interface {
+    public void method();
+}
+class TestInterface{
+    public static void main(String[] args) {
+        Interface obj = ()->{System.out.println("method called");};
+        obj.method();
+    }
+}
+
+Ex-2
+without Lambda
+@FunctionalInterface
+public interface Interface {
+    public int addThreeNumber(int a, int b, int c);
+}
+
+class InterfaceImpl implements Interface{
+    public int addThreeNumber(int a, int b, int c){
+        return a+b+c;
+    }
+}
+class TestInterface{
+    public static void main(String[] args) {
+        InterfaceImpl obj = new InterfaceImpl();
+        System.out.println(obj.addThreeNumber(10, 20, 30));
+    }
+}
+
+with Lambda
+
+@FunctionalInterface
+public interface Interface {
+    public int addThreeNumber(int a, int b, int c);
+}
+class TestInterface{
+    public static void main(String[] args) {
+        Interface obj = (int a, int b, int c)->{return a+b+c;};
+        System.out.println(obj.addThreeNumber(10,20,30));
+    }
+}
+
+
+Que 1:
+method which takes a String as argument and returns all letter in uppercase//"Rajat" = "RAJAT"
+
+Que 2:
+method which takes 2 int as argument and return greater number
+
+Que 3:
+method which takes a String as argument and returns its reverse
+//abcd  = dcba
+Que 4:
+method which takes a String as argument and returns its first character
+
+Que 5:
+method which takes (a String, char c) as argument and check if c present in a
+//India, a  = true
+//India, b = false
