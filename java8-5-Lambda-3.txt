@@ -6,15 +6,96 @@ But, now some scenario are there where we need to right more than one statement.
 Que 1:
 method which takes a String as argument and print its reverse. eg abcd=dcba
 
+Sol-
+@FunctionalInterface
+public interface StringReverse {
+    void printReverse(String arg);
+}
+
+class UseStringReverse{
+    public static void main(String[] args) {
+        StringReverse ref = (String str)->{
+//            System.out.println(new StringBuffer(arg).reverse());
+        String rev="";
+        for(int i=str.length()-1 ; i>=0 ; i--)
+            rev = rev+str.charAt(i);
+            System.out.println("Reverse is "+rev);
+        };
+        ref.printReverse("abcd");
+    }
+}
+
 Que 2:
 method which takes a String as argument and check if it is palindrome or not. eg level = level -	true		
 					abcd != dcba = false
 
+Sol-
+@FunctionalInterface
+public interface CheckPalindrome {
+    boolean checkPalindrome(String arg);
+}
+
+class UseCheckPalindrome{
+    public static void main(String[] args) {
+        CheckPalindrome ref = (String str)->{
+        String rev="";
+        for(int i=str.length()-1 ; i>=0 ; i--)
+            rev = rev+str.charAt(i);
+        
+        return str.equals(rev);
+        };
+        boolean isPalindrome = ref.checkPalindrome("level");
+        System.out.println(isPalindrome);
+    }
+}
+
 Que 3:
 method which takes an int array as argument and return sum of all number.
 
+Sol-
+@FunctionalInterface
+public interface CalculateSum {
+    int calculateSum(int arr[]);
+}
+
+class UseCalculateSum{
+    public static void main(String[] args) {
+        CalculateSum ref = (int arr[])->{
+            int sum=0;
+            for(int i=0 ; i<arr.length ; i++)
+                sum+=arr[i];
+            return sum;
+        };
+        
+        int arr[] = {2,1,4,3,5,6};
+        System.out.println(ref.calculateSum(arr));
+    }
+}
+
 Que 4:
 method which takes a number as argument and return sum of all digit.
+
+Sol-
+@FunctionalInterface
+public interface SumOfDigit {
+    int sumOfDigit(int n);
+}
+
+class UseSumOfDigit{
+    public static void main(String[] args) {
+        SumOfDigit ref = n->{
+            int sum=0;
+            while(n>0){
+                int rem = n%10;
+                sum+=rem;
+                n/=10;
+            }
+            return sum;
+        };
+        
+        System.out.println(ref.sumOfDigit(123));
+    }
+}
 
 Que 5:
 method which takes a number n as argument and print first n prime no.
@@ -22,3 +103,33 @@ method which takes a number n as argument and print first n prime no.
 2 ->  2,3
 4 ->  2,3,5,7
 5 ->  2,3,5,7,11
+
+Sol-
+@FunctionalInterface
+public interface FirstNPrime {
+    void calculateFirstNPrimeNo(int n);
+}
+
+class UseFirstNPrime{
+    public static void main(String[] args) {
+        FirstNPrime ref = (n)->{
+            int k=1;
+            System.out.println(2);
+            for(int i=3 ; i<Integer.MAX_VALUE && k<n; i++){
+                for(int j=2 ; j<=i ; j++){
+                    if(j==i){
+                        System.out.println(i);
+                        k++;
+                        continue;
+                    }
+                    if(i%j==0){
+                        break;
+                    }
+                }
+            }
+        
+        };
+        
+        ref.calculateFirstNPrimeNo(20);
+    }
+}
