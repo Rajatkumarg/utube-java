@@ -1,0 +1,24 @@
+Till now what we saw is "Single expression" i.e only one statement is there. 
+So, we are free to remove {}
+
+But, now some scenario are there where we need to right more than one statement. Then we will write those code inside {}.
+
+Que 1:
+method which takes a String as argument and print its reverse. eg abcd=dcba
+
+Que 2:
+method which takes a String as argument and check if it is palindrome or not. eg level = level -	true		
+					abcd != dcba = false
+
+Que 3:
+method which takes an int array as argument and return sum of all number.
+
+Que 4:
+method which takes a number as argument and return sum of all digit.
+
+Que 5:
+method which takes a number n as argument and print first n prime no.
+
+2 ->  2,3
+4 ->  2,3,5,7
+5 ->  2,3,5,7,11
