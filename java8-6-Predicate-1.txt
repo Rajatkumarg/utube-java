@@ -1,0 +1,142 @@
+The following are one of the very important function interfaces provided by java
+
+1. Predicate
+2. Function
+3. Consumer
+4. supplier
+
+Today we learn about Predicate.
+
+Predicate:
+Its a functional interface used to check boolean condition.
+eg - if we want to test if a number is even or not
+   - if we want to test if a person age is greater than 20 or not 
+   
+Predicate has 5 methods
+test() - abstract
+and() - default
+or() - default
+negate() - default
+isEqual() - static
+
+prototype of test() is : 
+	boolean test(T t);
+	
+-------------------------------
+
+@FunctionalInterface
+public interface DummyPredicate {
+    boolean test(int n);// no is even or not  even->true else->false
+}
+class UseDummyPredicate{
+    public static void main(String[] args) {
+        DummyPredicate ref = (int n)->{
+            if(n%2==0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        };
+        System.out.println("Is it even? "+ref.test(7));
+    }
+}
+-----------------------------------
+
+public class Predicate1 {
+    public static void main(String[] args) {
+        Predicate<Integer> ref = (Integer n)->{
+            if(n%2==0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        };
+        System.out.println("Is it even? "+ref.test(7));
+    }
+}
+------------------------------------------
+
+
+Que 1: check if a string is palindrome
+
+Sol:
+import java.util.function.Predicate;
+
+public class Predicate2 {
+    public static void main(String[] args) {
+        Predicate<String> predicate = str->{
+            
+            String rev = new String(new StringBuffer(str).reverse());
+            return rev.equals(str);
+        };
+		System.out.println(predicate.test("abcdcba");
+    }
+}
+
+Que 2: from a list, print only those no which is 	divisibe by 3
+Sol:
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class Predicate3 {
+    public static void main(String[] args) {
+        List<Integer> list = Arrays.asList(3,1,6,4,7);
+        Predicate<Integer> predicate = n -> n%3==0;
+        for(int n: list){
+            if(predicate.test(n)){
+                System.out.println(n);
+            }
+        }
+    }
+}
+
+Que 3: from a list, print only those no which is 	a)divisibe by 3
+b)divisibe by 4
+c)divisibe by 3 or 4
+c)divisibe by both 3 and 4
+
+Sol:
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class Predicate4 {
+    public static void main(String[] args) {
+        List<Integer> list = Arrays.asList(3,1,6,4,7,12,24,21);
+        
+        Predicate<Integer> divisibleByThree = n -> n%3==0;
+        Predicate<Integer> divisibleByFour = n -> n%4==0;
+        Predicate<Integer> divisibleByEitherThreeOrFour = divisibleByThree.or(divisibleByFour);
+        Predicate<Integer> divisibleByThreeAndFourBoth = divisibleByThree.and(divisibleByFour);
+        System.out.println("Numbers divisible by 3");
+        for(int n: list){
+            if(divisibleByThree.test(n)){
+                System.out.println(n);
+            }
+        }
+        System.out.println("Numbers divisible by 4");
+        for(int n: list){
+            if(divisibleByFour.test(n)){
+                System.out.println(n);
+            }
+        }
+        System.out.println("Numbers divisible either 3 or 4");
+        for(int n: list){
+            if(divisibleByEitherThreeOrFour.test(n)){
+                System.out.println(n);
+            }
+        }
+        System.out.println("Numbers divisible both 3 and 4");
+        for(int n: list){
+            if(divisibleByThreeAndFourBoth.test(n)){
+                System.out.println(n);
+            }
+        }
+    }
+}
+
+
+
