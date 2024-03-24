@@ -1,0 +1,213 @@
+Predicate:
+	
+Que 4:
+from Employee list, print only those employee who is Lead or Manager.
+Sol:
+import java.util.*;
+import java.util.function.Predicate;
+
+public class PredicateDriver {
+    public static void main(String[] args) {
+        List<Employee> empList = Arrays.asList(
+                new Employee("Shivam",40,"Developer"),
+                new Employee("Rashmi",35,"Lead"),
+                new Employee("Ritik",42,"Manager"),
+                new Employee("Ahuja",28,"Tester"),
+                new Employee("Pratik",34,"Developer"),
+                new Employee("Kritika",50,"Manager")
+        );
+        
+        Predicate<Employee> lead = emp->emp.getDesignation().equalsIgnoreCase("Lead");
+        Predicate<Employee> manager = emp->emp.getDesignation().equalsIgnoreCase("Manager");
+        
+        System.out.println("----Only Lead----");
+        perform(empList, lead);
+        
+        System.out.println("----Only Manager----");
+        perform(empList, manager);
+        
+        Predicate<Employee> leadOrManager = lead.or(manager);
+        System.out.println("----Either lead or manager----");
+        perform(empList, leadOrManager);
+        
+    }
+    
+    private static void perform(List<Employee> empList, Predicate<Employee> predicate){
+        for(Employee emp : empList){
+            boolean result = predicate.test(emp);
+            if(result)
+                System.out.println(emp);
+        }
+    }
+}
+
+
+Que 5:
+from Employee list, print only those employee whose age is greater than or equal to 40 and is Lead or Manager.
+Sol:
+import java.util.*;
+import java.util.function.Predicate;
+
+public class PredicateDriver1 {
+    public static void main(String[] args) {
+        List<Employee> empList = Arrays.asList(
+                new Employee("Shivam",40,"Developer"),
+                new Employee("Rashmi",35,"Lead"),
+                new Employee("Ritik",42,"Manager"),
+                new Employee("Joe",45,"Lead"),
+                new Employee("Ahuja",28,"Tester"),
+                new Employee("Pratik",34,"Developer"),
+                new Employee("Kritika",50,"Manager")
+        );
+        
+        Predicate<Employee> lead = emp->emp.getDesignation().equalsIgnoreCase("Lead");
+        Predicate<Employee> manager = emp->emp.getDesignation().equalsIgnoreCase("Manager");
+        
+        System.out.println("----Only Lead----");
+        perform(empList, lead);
+        
+        System.out.println("----Only Manager----");
+        perform(empList, manager);
+        
+        Predicate<Employee> leadOrManager = lead.or(manager);
+        System.out.println("----Either lead or manager----");
+        perform(empList, leadOrManager);
+        
+        Predicate<Employee> ageGreaterThanOrEqualTo40 = emp->emp.getAge()>=40;
+         System.out.println("----Employee Greater than 40----");
+        perform(empList, ageGreaterThanOrEqualTo40);
+        
+        Predicate<Employee> ageGreaterThanOrEqualTo40AndIsLeadOrManager = 
+                ageGreaterThanOrEqualTo40.and(leadOrManager);
+        System.out.println("----Employee Greater than 40 and is Lead or Manager----");
+        perform(empList, ageGreaterThanOrEqualTo40AndIsLeadOrManager);
+        
+    }
+    
+    private static void perform(List<Employee> empList, Predicate<Employee> predicate){
+        for(Employee emp : empList){
+            boolean result = predicate.test(emp);
+            if(result)
+                System.out.println(emp);
+        }
+    }
+}
+
+Que 6:
+from Employee class, print only those employee whose age is greater than or equal to 40 and is only Manager.
+
+Que 7:
+from Employee list, print only those employee who is neither Lead nor Manager.//negate()
+
+Sol:
+import java.util.*;
+import java.util.function.Predicate;
+
+public class PredicateDriver2 {
+    public static void main(String[] args) {
+        List<Employee> empList = Arrays.asList(
+                new Employee("Shivam",40,"Developer"),
+                new Employee("Rashmi",35,"Lead"),
+                new Employee("Ritik",42,"Manager"),
+                new Employee("Joe",45,"Lead"),
+                new Employee("Ahuja",28,"Tester"),
+                new Employee("Pratik",34,"Developer"),
+                new Employee("Kritika",50,"Manager")
+        );
+        
+        Predicate<Employee> lead = emp->emp.getDesignation().equalsIgnoreCase("Lead");
+        Predicate<Employee> manager = emp->emp.getDesignation().equalsIgnoreCase("Manager");
+        
+        System.out.println("----Only Lead----");
+        perform(empList, lead);
+        
+        System.out.println("----Only Manager----");
+        perform(empList, manager);
+        
+        Predicate<Employee> leadOrManager = lead.or(manager);
+        System.out.println("----Either lead or manager----");
+        perform(empList, leadOrManager);
+        
+        Predicate<Employee> ageGreaterThanOrEqualTo40 = emp->emp.getAge()>=40;
+         System.out.println("----Employee Greater than 40----");
+        perform(empList, ageGreaterThanOrEqualTo40);
+        
+        Predicate<Employee> ageGreaterThanOrEqualTo40AndIsLeadOrManager = 
+                ageGreaterThanOrEqualTo40.and(leadOrManager);
+        System.out.println("----Employee Greater than 40 and is Lead or Manager----");
+        perform(empList, ageGreaterThanOrEqualTo40AndIsLeadOrManager);
+        
+        Predicate<Employee> ageGreaterThanOrEqualTo40AndManager = 
+                ageGreaterThanOrEqualTo40.and(manager);
+         System.out.println("----Employee Greater than 40 and is Manager----");
+        perform(empList, ageGreaterThanOrEqualTo40AndManager);
+        
+        Predicate<Employee> neitherLeadNorManager = 
+                lead.negate().and(manager.negate());
+        System.out.println("----Employee who is neither Lead nor Manager----");
+        perform(empList, neitherLeadNorManager);
+    }
+    
+    private static void perform(List<Employee> empList, Predicate<Employee> predicate){
+        for(Employee emp : empList){
+            boolean result = predicate.test(emp);
+            if(result)
+                System.out.println(emp);
+        }
+    }
+}
+
+
+
+
+isEqual():
+
+Predicate<String> name = Predicate.isEqual("Rajat");
+name.test("Rajat"); -> true
+
+---------------------------
+
+public class Employee {
+    private String name;
+    private int age;
+    private String designation;
+
+    public Employee(String name, int age, String designation) {
+        this.name = name;
+        this.age = age;
+        this.designation = designation;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "name=" + name + ", age=" + age + ", designation=" + designation + '}';
+    }
+    
+    
+}
+
+
