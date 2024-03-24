@@ -1,0 +1,168 @@
+Function Interface:
+
+- From java.util.function package.
+
+- It is a functional interface that represents a function that takes one argument and produces a result. The argument and the result can be of different types.
+
+-The Function interface has the following signature:
+interface Function<T, R> {
+    R apply(T t);
+}
+T represents the type of the input argument.
+R represents the type of the result.
+
+-It contains four method
+apply()
+compose()
+andThen()
+identity()
+
+Using apply() - abstract
+
+Que-1
+Write a Function to convert integer to a string.
+@FunctionalInterface
+interface DummyFunction{
+    String apply(int a);
+}
+
+public class Function1 {
+    public static void main(String[] args) {
+        DummyFunction df = (int i) -> { return String.valueOf(i);};
+        String str = df.apply(5);
+        System.out.println(str);
+    }
+}
+
+
+package ep8;
+
+import java.util.function.Function;
+
+//Function<T,R>
+//
+// R apply(T)
+
+public class FunctionDemo1 {
+    public static void main(String[] args) {
+        Function<Integer, String> stringCOnversion = i -> String.valueOf(i);
+        String str = stringCOnversion.apply(5);
+        System.out.println(str);
+        System.out.println(str.getClass().getName());
+    }
+}
+
+
+Que-2
+Write a Function to return last name from a String containing fullname.
+
+
+package ep8;
+
+import java.util.function.Function;
+
+public class FunctionDemo2 {
+    public static void main(String[] args) {
+        //fullname - String , lastname - String
+//        fullName -> "Rahul Singh"; 
+//        lastName -> "Singh"
+        Function<String, String> lastNameReturn = fullname -> {
+            String[] name = fullname.split(" ");
+            int length = name.length;
+            int returnIndex = length-1;
+            String lastname = name[returnIndex];
+            return lastname;
+        };
+        String lastName = lastNameReturn.apply("Rahul Singh");
+        System.out.println("Lastname is "+lastName);
+        
+        Function<String, String> lastNameReturn2 = fullname -> fullname.split(" ")[fullname.split(" ").length-1];
+        lastName = lastNameReturn2.apply("Rajat Kumar");
+        System.out.println("Lastname is "+lastName);
+        
+    }
+}
+
+
+Que-3
+Write a Function to calculate square of an Integer.
+
+
+package ep8;
+
+import java.util.function.Function;
+
+public class FunctionDemo3 {
+    public static void main(String[] args) {
+        //intteger -i , square - integer
+        Function<Integer, Integer> doSquare = no -> no*no;
+        int square = doSquare.apply(9);
+        System.out.println(square);
+        
+        Function<Integer, Double> doSquare2 = no -> Math.pow(no, 2);
+        double square2 = doSquare2.apply(9);
+        System.out.println(square2);
+    }
+}
+
+
+
+Que-4
+Write a Function to return first name from a String containing fullname.
+
+
+package ep8;
+
+import java.util.function.Function;
+
+public class FunctionDemo4 {
+    public static void main(String[] args) {
+        //fullname - String , lastname - String
+//        fullName -> "Rahul Singh"; 
+//        lastName -> "Rahul"
+        Function<String, String> lastNameReturn = fullname -> {
+            String[] name = fullname.split(" ");
+            String lastname = name[0];
+            return lastname;
+        };
+        String firstName = lastNameReturn.apply("Rahul Singh");
+        System.out.println("Lastname is "+firstName);
+        
+        Function<String, String> lastNameReturn2 = fullname -> fullname.split(" ")[0];
+        firstName = lastNameReturn2.apply("Rajat Kumar");
+        System.out.println("Lastname is "+firstName);
+        
+    }
+}
+
+
+Que-5
+Write a Function that accepts any array of String containing fullname as argument and returns last name for each name.
+
+
+package ep8;
+
+import java.util.function.Function;
+
+public class FunctionDemo5 {
+    public static void main(String[] args) {
+        //fullname - String , lastname - String
+//        fullName[] -> {"Rahul Singh","Rajat Kumar","David Miller",Rohit Raj","A K Gupta"}; 
+//        lastName[] -> {"Singh","Kumar","Miller","Raj","Gupta"};
+        
+        Function<String[], String[]> returnLastNames = fullNames -> {
+          String[] lastNames = new String[fullNames.length]; 
+          int i=0;
+          for(String fullName: fullNames){
+              String lastName = fullName.split(" ")[fullName.split(" ").length-1];
+              lastNames[i] = lastName;
+              i++;
+          }
+          return lastNames;
+        };
+        
+        String[] lastNames = returnLastNames.apply(new String[]{"Rahul Singh","Rajat Kumar","David Miller","Rohit Raj","A K Gupta"});
+        for(String lastName: lastNames)
+            System.out.println(lastName);
+    }
+}
