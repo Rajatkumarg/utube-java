@@ -1,0 +1,94 @@
+Using compose() - default
+The compose method is used to create a new function, where the output of the second function becomes the input for the first function
+
+
+package ep9;
+
+import java.util.function.Function;
+
+public class Function2 {
+    
+    public static void main(String[] args) {
+        
+        Function<Integer, Integer> add = no -> no+5;
+        
+        Function<Integer, Integer> square = no -> no*no;
+        
+//        int r1 = add.apply(11);
+//        System.out.println(r1);
+//        
+//        int r2 = square.apply(10);
+//        System.out.println(r2);
+        
+        //10 -> 15 -> 225
+        //3 -> 8 -> 64
+        //7 -> 12 -> 144
+        
+        Function<Integer, Integer> squareThenAdd = add.compose(square);
+        int ans = squareThenAdd.apply(10);
+        System.out.println(ans);
+        
+    }
+}
+
+
+Using andThen() - default
+The compose method is used to create a new Function, where the output of the first function becomes the input to the second function
+
+EX
+
+
+package ep9;
+
+import java.util.function.Function;
+
+public class Function1 {
+    
+    public static void main(String[] args) {
+        
+        Function<Integer, Integer> add = no -> no+5;
+        
+        Function<Integer, Integer> square = no -> no*no;
+        
+//        int r1 = add.apply(11);
+//        System.out.println(r1);
+//        
+//        int r2 = square.apply(10);
+//        System.out.println(r2);
+        
+        //10 -> 15 -> 225
+        //3 -> 8 -> 64
+        //7 -> 12 -> 144
+        
+        Function<Integer, Integer> addThenSquare = add.andThen(square);
+        int ans = addThenSquare.apply(7);
+        System.out.println(ans);
+        
+    }
+}
+
+
+Using identity() - static
+-It returns a function that always returns its input argument
+
+static <T> Function<T, T> identity() {
+    return t -> t;
+}
+
+
+package ep9;
+
+import java.util.function.Function;
+
+public class Function3 {
+    
+    public static void main(String[] args) {
+        
+       Function<Integer, Integer> identity = Function.identity();
+       
+       int result = identity.apply(4);
+        System.out.println(result);
+        
+    }
+}
+
